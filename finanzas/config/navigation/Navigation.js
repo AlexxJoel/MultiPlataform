@@ -21,12 +21,12 @@ export default function Navigation() {
             >
                 <Tab.Screen
                 name='profile'
-                options={{title: 'Perfil'}}
+                options={{title: 'Profile'}}
                 component={ProfileStack} //es la vista que queremos mostrar
                 />
                  <Tab.Screen
                 name='about'
-                options={{title: 'Conocenos'}}
+                options={{title: 'About Us'}}
                 component={AboutStack} //es la vista que queremos mostrar
                 />
             </Tab.Navigator>
