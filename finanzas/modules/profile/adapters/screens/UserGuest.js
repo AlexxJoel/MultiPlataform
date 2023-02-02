@@ -2,7 +2,8 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import React from 'react'
 import { Image, Button } from '@rneui/base'
 
-const UserGuest = () => {
+const UserGuest = (props) => {
+    const {navigation} = props
     return (
         <View style={styles.container}>
             <ScrollView centerContent={true} style={styles.mx}>
@@ -20,6 +21,7 @@ const UserGuest = () => {
                             size: 18
                         }}
                         buttonStyle={styles.btn} containerStyle={styles.btnContainer}
+                        onPress={()=> navigation.navigate('profileStack')}
                     ></Button>
                 </View>
 
@@ -40,6 +42,7 @@ const styles = StyleSheet.create({
     mx: {
         marginLeft: 32,
         marginRight: 32,
+        marginTop:155
     },
     img: {
         width: '100%',
