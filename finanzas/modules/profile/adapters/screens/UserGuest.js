@@ -10,18 +10,18 @@ const UserGuest = (props) => {
                 {/* <Image source={{uri : ''}}></Image> */}
                 <Image source={require('../../../../assets/finanzas.png')} resizeMode='contain' style={styles.img}></Image>
                 <Text style={styles.title}>Welcome to MoneyPig </Text>
-                <Text style={styles.description}>Would you like to save Money?. We can help you, do or start session in our  app and discoverd the best way of saving  your money</Text>
+                <Text style={styles.description}>Would you like to save Money?. We can help you, to do or start accout in our  app and discoverd the best way of saving  your money</Text>
                 <View style={styles.viewBtnContainer}>
                     <Button
                         title='Log In'
                         icon={{
-                            name: 'login',
+                            name: 'login', 
                             type: 'material-community',
                             color: 'white',
                             size: 18
                         }}
                         buttonStyle={styles.btn} containerStyle={styles.btnContainer}
-                        onPress={()=> navigation.navigate('profileStack')}
+                        onPress={()=> navigation.navigate('loginStack')}
                     ></Button>
                 </View>
 
@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         textAlign: 'center',
-        margin: 16
+        margin: 5
 
     },
     description: {
         textAlign: 'center',
-        marginBottom: 16
+        marginBottom: 20
     },
     viewBtnContainer:{
         flex:1, 
