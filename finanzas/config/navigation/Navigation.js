@@ -1,11 +1,13 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Icon } from '@rneui/base'
-import Profile from '../../modules/profile/adapters/screens/Profile'
-import About from '../../modules/about/adapters/screens/About'
+
+//stack
 import AboutStack from '../stack/AboutStack'
 import ProfileStack from '../stack/ProfileStack'
+
 const Tab = createBottomTabNavigator()
 export default function Navigation() {
     return (
