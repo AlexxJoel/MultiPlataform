@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function About() {
+export default function UserLogged() {
     return (
         <View>
-            <Text>About</Text>
+            <Text>UserLogged</Text>
         </View>
     )
 }
