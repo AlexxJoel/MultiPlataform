@@ -20,6 +20,8 @@
 
     npm install @rneui/base@edge @rneui/themed@edge
 
+    _React Native_
+
 
 
 ## Documentations Link
