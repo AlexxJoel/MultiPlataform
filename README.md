@@ -20,8 +20,15 @@
 
     npm install @rneui/base@edge @rneui/themed@edge
 
-    _React Native_
 
+    _React Native_
+    To focus
+
+    npm i react-native-keyboard-aware-scroll-view --save
+
+    Lodash
+
+    npm i --save lodash
 
 
 ## Documentations Link

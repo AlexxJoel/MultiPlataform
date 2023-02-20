@@ -1,12 +1,9 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Icon } from '@rneui/base'
-
-//stack
-import AboutStack from '../stack/AboutStack'
 import ProfileStack from '../stack/ProfileStack'
+import AboutStack from '../stack/AboutStack'
 
 const Tab = createBottomTabNavigator()
 export default function Navigation() {
@@ -16,44 +13,39 @@ export default function Navigation() {
                 initialRouteName='profile'
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ color }) => screenOptions(route, color),
-                    tabBarActiveTintColor: 'tomato', //color que toma la posicion actual
-                    tabBarInactiveTintColor: 'gray', //color de los que no estan activos
-                    headerShown: false
-                })}
-            >
-                <Tab.Screen
+                    tabBarActiveTintColor: 'tomato',
+                    tabBarInactiveTintColor: 'gray',
+                    headerShown:false
+                })}>
+                <Tab.Screen 
                 name='profile'
-                options={{title: 'Profile'}}
-                component={ProfileStack} //es la vista que queremos mostrar
+                options={{title: 'Perfil'}}
+                component={ProfileStack} //que vista esperamos que se renderice cuando el usuario le de click a una opción
                 />
-                 <Tab.Screen
+                <Tab.Screen 
                 name='about'
-                options={{title: 'About Us'}}
-                component={AboutStack} //es la vista que queremos mostrar
+                options={{title: 'Acerca de'}}
+                component={AboutStack} //que vista esperamos que se renderice cuando el usuario le de click a una opción
                 />
             </Tab.Navigator>
         </NavigationContainer>
     )
-}   
+}
 
 const screenOptions = (route, color) => {
     let iconName;
     switch (route.name) {
         case 'profile':
-            iconName = 'account-outline';
+            iconName = 'account-circle-outline'
             break;
         case 'about':
-            iconName = 'information-outline';
-            break;
-
+            iconName = 'information-outline'
+            break
         default:
             break;
     }
-    return (
-    <Icon
-    type='material-community'
-    name={iconName}
-    size={22}
-    color={color}
-    ></Icon>)
+    return (<Icon type='material-community'
+        name={iconName}
+        size={22}
+        color={color}></Icon>)
 }
