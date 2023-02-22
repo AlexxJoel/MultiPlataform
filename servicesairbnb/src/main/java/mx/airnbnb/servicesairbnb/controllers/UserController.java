@@ -62,7 +62,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarUser(@PathVariable("id") int id){
-        if (userService.existsByIdUser(id))
+        if (!userService.existsByIdUser(id))
             return new ResponseEntity(new Mensaje("No existe "), HttpStatus.NOT_FOUND);
         userService.deleteUser(id);
         return new ResponseEntity(new Mensaje("Usera eliminada"), HttpStatus.OK);
