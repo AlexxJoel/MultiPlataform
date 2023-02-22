@@ -1,6 +1,7 @@
 package mx.airnbnb.servicesairbnb.Rent;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,19 +25,26 @@ public class Rent {
     private  int id ;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departament_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("rent")
     private Departament departament;
 
-    @OneToOne(cascade = CascadeType.ALL)
+
+    private String description;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("rent")
     private User user;
 
-    private Date date;
 
-    public Rent(Departament departament, User user, Date date) {
-        this.departament = departament;
-        this.user = user;
-        this.date = date;
-    }
+    @Column(nullable = false ,  columnDefinition = "TIMESTAMP")
+    private String start_rent;
+
+    @Column(nullable = false ,  columnDefinition = "TIMESTAMP")
+    private String end_rent;
+
+
+
 }

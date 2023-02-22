@@ -32,8 +32,8 @@ public class RentService {
     }
 
 
-    public  void save(Rent torre){
-        rentRepository.save(torre);
+    public  void save(Rent rent){
+        rentRepository.insert(rent.getDescription(), rent.getEnd_rent(), rent.getStart_rent(), rent.getDepartament().getId(), rent.getUser().getId());
     }
 
         /*    public Optional<Rent> getByNombreRent(String nombre) {

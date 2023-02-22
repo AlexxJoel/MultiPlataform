@@ -1,9 +1,11 @@
 package mx.airnbnb.servicesairbnb.Person;
 
+import mx.airnbnb.servicesairbnb.utils.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,26 +16,60 @@ public class PersonService {
     @Autowired
     PersonRepository personRepository;
 
-    public List<Person> listaPerson(){
-        return  personRepository.findAll();
+    //Servicio para obtener todos los registros de people
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public CustomResponse<List<Person>> getAll(){
+        return new CustomResponse<>(
+                this.personRepository.findAll(),
+                false,
+                200,
+                "Ok"
+        );
     }
 
-    public Optional<Person> getPerson(int idPerson){
-        return personRepository.findById(idPerson);
+    //Servicio para obtener a una persona
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public CustomResponse<Person> getOne(int id){
+        return new CustomResponse<>(
+                this.personRepository.findById(id).get(),
+                false,
+                200,
+                "Ok"
+        );
+    }
+
+    //Servicio para insertar a una persona
+    //Valida la existencia por curp
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = {SQLException.class})
+    public CustomResponse<Person> insert(Person person){
+
+        return new CustomResponse<>(
+                this.personRepository.saveAndFlush(person),
+                false,
+                200,
+                "Persona registrada correctamente"
+        );
+    }
+
+    //Servicio para modificar a una persona
+    //Valida la existencia del registro por id
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = {SQLException.class})
+    public CustomResponse<Person> update(Person person){
+        if(!this.personRepository.existsById(person.getId())){
+            return new CustomResponse<>(
+                    null,
+                    true,
+                    400,
+                    "La persona no existe"
+            );
+        }
+        return new CustomResponse<>(
+                this.personRepository.saveAndFlush(person),
+                false,
+                200,
+                "Persona actualizada correctamente"
+        );
     }
 
 
-    public void deletePerson(int idPerson){
-        personRepository.deleteById(idPerson);
-    }
-
-    public boolean existsByIdPerson(int idPerson){
-        return personRepository.existsById(idPerson);
-    }
-
-
-    public  void save(Person person){
-
-        personRepository.saveAndFlush(person);
-    }
 }

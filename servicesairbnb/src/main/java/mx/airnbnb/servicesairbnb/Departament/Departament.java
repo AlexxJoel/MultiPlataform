@@ -1,16 +1,16 @@
 package mx.airnbnb.servicesairbnb.Departament;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mx.airnbnb.servicesairbnb.Person.Person;
 import mx.airnbnb.servicesairbnb.Rent.Rent;
-import mx.airnbnb.servicesairbnb.User.User;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "departaments")
@@ -48,23 +48,11 @@ public class Departament {
     @Column(nullable = false)
     private float price;
 
-    private Date start_rent;
+    @OneToMany(mappedBy = "departament", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("departament")
+    private List<Rent> rent;
 
-    private Date end_rent;
 
 
-    @OneToOne(mappedBy = "departament")
-    private Rent rent;
-
-    public Departament(String name, String location, String images, String description, float rating, int quantity_rating, float price) {
-        this.name = name;
-        this.location = location;
-        this.images = images;
-        this.description = description;
-        this.rating = rating;
-        this.quantity_rating = quantity_rating;
-        this.price = price;
-        this.rent = rent;
-    }
 }
 

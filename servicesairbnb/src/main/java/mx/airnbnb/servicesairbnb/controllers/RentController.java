@@ -30,36 +30,35 @@ public class RentController {
     @GetMapping("/{id}")
     public ResponseEntity<Rent> rentById(@PathVariable("id") int id){
 
-        if (rentService.existsByIdRent(id))
+        if (!rentService.existsByIdRent(id))
             return new ResponseEntity(new Mensaje("No existe la renta"), HttpStatus.NOT_FOUND);
 
         Rent rent = rentService.getRent(id).get();
         return new ResponseEntity(rent, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> creaRent(@RequestBody Rent rent){
+    @PostMapping("/")
+    public ResponseEntity<?> createRent(@RequestBody Rent rent){
 
-        Rent rentc = new Rent(rent.getDepartament(), rent.getUser(), rent.getDate());
+        Rent rentc = new Rent(rent.getId(), rent.getDepartament(), rent.getDescription(), rent.getUser(), rent.getStart_rent(), rent.getEnd_rent() );
         rentService.save(rentc);
         return new ResponseEntity(new Mensaje("Renta creada"), HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> actualizarRent(@PathVariable("id") int id, @RequestBody Rent rent){
 
         Rent rent1 = rentService.getRent(id).get();
 
         rent1.setDepartament(rent.getDepartament());
         rent1.setUser(rent.getUser());
-        rent1.setDate(rent.getDate());
         rentService.save(rent1);
         return new ResponseEntity(new Mensaje("Renta actualizada"), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarRent(@PathVariable("id") int id){
-        if (rentService.existsByIdRent(id))
+        if (!rentService.existsByIdRent(id))
             return new ResponseEntity(new Mensaje("No existe "), HttpStatus.NOT_FOUND);
         rentService.deleteRent(id);
         return new ResponseEntity(new Mensaje("Renta eliminada"), HttpStatus.OK);

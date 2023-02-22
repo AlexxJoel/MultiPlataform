@@ -26,30 +26,29 @@ public class DepartamentController {
         return  new ResponseEntity<List<Departament>>(departaments, HttpStatus.OK);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Departament> departamentById(@PathVariable("id") int id){
 
-        if (departamentService.existsByIdDepartament(id))
+        if (!departamentService.existsByIdDepartament(id))
             return new ResponseEntity(new Mensaje("No existe el departamento"), HttpStatus.NOT_FOUND);
 
         Departament departaments = departamentService.getDepartament(id).get();
         return new ResponseEntity(departaments, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> creaDepartament(@RequestBody Departament departament){
+        Departament departament1 = new Departament(departament.getId(), departament.getName(), departament.getLocation(), departament.getImages(), departament.getDescription(), departament.getRating(), departament.getQuantity_rating(), departament.getPrice(), departament.getRent());
 
-
-
-        Departament departament1 = new Departament(departament.getName(), departament.getLocation(), departament.getImages(), departament.getDescription(), departament.getRating(), departament.getQuantity_rating(), departament.getPrice());
         departamentService.save(departament1);
         return new ResponseEntity(new Mensaje("Departamenta creada"), HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> actualizarDepartament(@PathVariable("id") int id, @RequestBody Departament departament){
+    @PutMapping("/")
+    public ResponseEntity<?> actualizarDepartament( @RequestBody Departament departament){
 
-        Departament departament1 = departamentService.getDepartament(id).get();
+        Departament departament1 = departamentService.getDepartament(departament.getId()).get();
 
         departament1.setName(departament.getName());
         departament1.setDescription(departament.getDescription());
@@ -62,9 +61,9 @@ public class DepartamentController {
         return new ResponseEntity(new Mensaje("Departamenta actualizada"), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarDepartament(@PathVariable("id") int id){
-        if (departamentService.existsByIdDepartament(id))
+        if (!departamentService.existsByIdDepartament(id))
             return new ResponseEntity(new Mensaje("No existe "), HttpStatus.NOT_FOUND);
         departamentService.deleteDepartament(id);
         return new ResponseEntity(new Mensaje("Departamento eliminada"), HttpStatus.OK);

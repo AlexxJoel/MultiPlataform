@@ -1,6 +1,7 @@
 package mx.airnbnb.servicesairbnb.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import mx.airnbnb.servicesairbnb.Person.Person;
 import mx.airnbnb.servicesairbnb.Rent.Rent;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -38,9 +40,9 @@ public class User {
     private Person person;
 
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "user")
-    private Rent rent;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<Rent> rent;
 
     public User(String email, String uid, String image_profile, Person person) {
         this.email = email;

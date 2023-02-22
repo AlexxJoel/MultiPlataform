@@ -26,28 +26,20 @@ public class Person {
     @Column(nullable = false)
     private String full_name;
 
-    @Column(nullable = false)
-    private Date birthday;
+    @Column(nullable = false ,  columnDefinition = "TIMESTAMP")
+    private String birthday;
 
 
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = false)
     @JsonIgnore
     private User  user;
 
-    public Person(int id, String full_name, Date birthday, User user) {
+    public Person(int id, String full_name, String birthday, User user) {
         this.id = id;
         this.full_name = full_name;
         this.birthday = birthday;
         this.user = user;
+        this.user.setPerson(this);
     }
 
-
-    public Person getPerson(){
-        return new Person(
-                getId(),
-                getFull_name(),
-                getBirthday(),
-                getUser()
-        );
-    }
 }
