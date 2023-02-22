@@ -16,10 +16,8 @@ import java.util.List;
 @CrossOrigin(origins = {"*"})
 public class PersonController {
 
-
     @Autowired
     PersonService personService;
-
 
     @GetMapping("/")
     public ResponseEntity<List<Person>> listPerson(){
@@ -29,29 +27,23 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Person> personById(@PathVariable("id") int id){
-
-        if (personService.existsByIdPerson(id))
+        if (!personService.existsByIdPerson(id))
             return new ResponseEntity(new Mensaje("No existe la persona"), HttpStatus.NOT_FOUND);
-
         Person person = personService.getPerson(id).get();
         return new ResponseEntity(person, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> creaPerson(@RequestBody Person person){
-
-
-
-        Person person1 = new Person(person.getFull_name(), person.getBirthday(), person.getUser());
-        personService.save(person1);
-        return new ResponseEntity(new Mensaje("Persona creada"), HttpStatus.OK);
+    @PostMapping("/")
+    public ResponseEntity<?> createPerson(@RequestBody Person person){
+        Person person1 = new Person();
+        personService.save(person.getPerson());
+        return new ResponseEntity(new Mensaje("Persona creada") , HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> actualizarPerson(@PathVariable("id") int id, @RequestBody Person person){
 
         Person person1 = personService.getPerson(id).get();
-
         person1.setFull_name(person.getFull_name());
         person1.setBirthday(person.getBirthday());
         person1.setUser(person.getUser());
@@ -59,9 +51,9 @@ public class PersonController {
         return new ResponseEntity(new Mensaje("Persona actualizada"), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarPerson(@PathVariable("id") int id){
-        if (personService.existsByIdPerson(id))
+        if (!personService.existsByIdPerson(id))
             return new ResponseEntity(new Mensaje("No existe "), HttpStatus.NOT_FOUND);
         personService.deletePerson(id);
         return new ResponseEntity(new Mensaje("Persona eliminada"), HttpStatus.OK);

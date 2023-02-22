@@ -34,4 +34,8 @@ public class UserService {
     public  void save(User user){
         userRepository.save(user);
     }
+
+    public  void saveUser(User user){
+        userRepository.saveWithUser(user.getEmail() , user.getImage_profile(),  user.getUid(), user.getPerson().getId()  );
+    }
 }

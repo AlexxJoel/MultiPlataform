@@ -10,6 +10,7 @@ import mx.airnbnb.servicesairbnb.Rent.Rent;
 import mx.airnbnb.servicesairbnb.User.User;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "departaments")
@@ -24,6 +25,7 @@ public class Departament {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id ;
 
+    @Column(nullable = false)
     private  String name;
 
     @Column(columnDefinition = "JSON")
@@ -36,11 +38,20 @@ public class Departament {
     @Column(columnDefinition = "LONGTEXT")
     private String description;
 
+
+    @Column(nullable = false)
     private float rating;
 
+    @Column(nullable = false)
     private int quantity_rating;
 
+    @Column(nullable = false)
     private float price;
+
+    private Date start_rent;
+
+    private Date end_rent;
+
 
     @OneToOne(mappedBy = "departament")
     private Rent rent;

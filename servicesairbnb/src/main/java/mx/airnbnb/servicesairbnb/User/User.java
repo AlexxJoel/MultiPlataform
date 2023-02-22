@@ -1,5 +1,6 @@
 package mx.airnbnb.servicesairbnb.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +22,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id ;
 
+
+    @Column(nullable = false)
     private String email ;
 
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String uid;
 
     @Column(columnDefinition = "LONGTEXT")
@@ -30,17 +34,18 @@ public class User {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    @JoinColumn(name = "person_id", referencedColumnName = "id" , unique = true)
     private Person person;
 
+
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
     private Rent rent;
 
-    public User(String email, String uid, String image_profile, Person person, Rent rent) {
+    public User(String email, String uid, String image_profile, Person person) {
         this.email = email;
         this.uid = uid;
         this.image_profile = image_profile;
         this.person = person;
-        this.rent = rent;
     }
 }

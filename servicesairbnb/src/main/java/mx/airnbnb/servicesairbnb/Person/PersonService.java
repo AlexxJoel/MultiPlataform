@@ -32,7 +32,8 @@ public class PersonService {
     }
 
 
-    public  void save(Person torre){
-        personRepository.save(torre);
+    public  void save(Person person){
+
+        personRepository.saveAndFlush(person);
     }
 }

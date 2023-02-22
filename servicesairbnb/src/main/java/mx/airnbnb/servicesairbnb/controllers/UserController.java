@@ -30,22 +30,22 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> userById(@PathVariable("id") int id){
 
-        if (userService.existsByIdUser(id))
+        if (!userService.existsByIdUser(id))
             return new ResponseEntity(new Mensaje("No existe  user"), HttpStatus.NOT_FOUND);
 
         User user = userService.getUser(id).get();
         return new ResponseEntity(user, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> creaUser(@RequestBody User user){
 
-        User user1 = new User(user.getEmail(), user.getUid(), user.getImage_profile(), user.getPerson(), user.getRent());
-        userService.save(user1);
-        return new ResponseEntity(new Mensaje("Usera creada"), HttpStatus.OK);
+        User user1 = new User(user.getEmail(), user.getUid(), user.getImage_profile(), user.getPerson());
+        userService.saveUser(user1);
+        return new ResponseEntity(new Mensaje("User creada"), HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> actualizarUser(@PathVariable("id") int id, @RequestBody User user){
 
         User user1 = userService.getUser(id).get();
@@ -60,7 +60,7 @@ public class UserController {
         return new ResponseEntity(new Mensaje("Usera actualizada"), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarUser(@PathVariable("id") int id){
         if (userService.existsByIdUser(id))
             return new ResponseEntity(new Mensaje("No existe "), HttpStatus.NOT_FOUND);
