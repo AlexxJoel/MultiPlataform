@@ -4,9 +4,15 @@ import React from 'react'
 export default function UserLogged() {
     return (
         <View>
-            <Text>UserLogged</Text>
+            <Text style={styles.a}>Perfil</Text>
         </View>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    a:{
+        marginTop: 30, 
+        fontSize: 30,
+        textAlign: "center"
+    }
+})

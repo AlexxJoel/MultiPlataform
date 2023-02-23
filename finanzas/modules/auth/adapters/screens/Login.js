@@ -30,7 +30,7 @@ export default function Login(props) {
           }
           console.log("Login",user);
           setShow(false)
-          navigation.navigate("userGuestStack")
+          navigation.navigate("profileStack")
         })
         .catch((error) => {
           setError({ email: '', password: 'Usuario o contraseña incorrectos' })
@@ -45,7 +45,7 @@ export default function Login(props) {
   };
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.container1}>
         <Image
           source={require("../../../../assets/presupuesto.png")}
           resizeMode="contain"
@@ -88,7 +88,7 @@ export default function Login(props) {
         />
         <Text
           style={styles.createAccount}
-          onPress={() => console.log("Vamos")}>
+          onPress={() => navigation.navigate('createUserStackt')}>
           Crear cuenta
         </Text>
         <Loading show={show} text='Iniciando sesión' />
@@ -101,12 +101,15 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     height: "100%",
+  }, container1: {
+    marginTop: 100,
+    margin: 30
   },
   logotype: {
     width: "100%",
     height: 150,
     marginTop: 16,
-    marginBottom: 16,
+    marginBottom: 25,
   },
   input: {
     width: '100%',
@@ -119,6 +122,7 @@ const styles = StyleSheet.create({
     margin: 16
   },
   createAccount: {
-    color: '#007bff'
+    color: '#007bff', 
+    textAlign: "center"
   },
 });

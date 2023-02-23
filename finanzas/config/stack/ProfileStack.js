@@ -9,12 +9,12 @@ const Stack = createNativeStackNavigator()
 export default function ProfileStack() {
     return (
         <Stack.Navigator
+        initialRouteName='userGuestStack'
             screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: 'white',
                 headerStyle: { backgroundColor: '#ff5a60' }
             }}>
-    
             <Stack.Screen
                 name='profileStack'
                 options={{ title: 'Perfil' }}
@@ -30,9 +30,8 @@ export default function ProfileStack() {
                 options={{ title: 'Inicio de sesión' }}
                 component={Login} 
             />
-
             <Stack.Screen
-                name='createUserStack'
+                name='createUserStackt'
                 options={{ title: 'Crea tu cuenta' }}
                 component={CreateUser} 
             />

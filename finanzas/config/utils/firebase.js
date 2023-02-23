@@ -11,8 +11,7 @@ const firebaseConfig = {
     storageBucket: "finanzas-e7859.appspot.com",
     messagingSenderId: "46441594516",
     appId: "1:46441594516:web:2efd70b075642e87093e81",
-    measurementId: "G-Q638GH2WY7"
-  };
+};
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
