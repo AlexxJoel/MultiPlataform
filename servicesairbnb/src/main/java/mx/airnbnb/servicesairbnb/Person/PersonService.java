@@ -72,4 +72,14 @@ public class PersonService {
     }
 
 
+    public void deletePerson(int id){
+        personRepository.deleteById(id);
+    }
+
+    public boolean existsByIdPerson(int id){
+        return personRepository.existsById(id);
+    }
+
+
+
 }

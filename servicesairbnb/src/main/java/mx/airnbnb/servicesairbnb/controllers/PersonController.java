@@ -2,6 +2,7 @@ package mx.airnbnb.servicesairbnb.controllers;
 
 import mx.airnbnb.servicesairbnb.Person.PersonService;
 import mx.airnbnb.servicesairbnb.Person.Person;
+import mx.airnbnb.servicesairbnb.dto.Mensaje;
 import mx.airnbnb.servicesairbnb.dto.PersonDto;
 import mx.airnbnb.servicesairbnb.utils.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class PersonController {
     //Obtener un registro de people
     @GetMapping("/{id}")
     public ResponseEntity<CustomResponse<Person>> getOne(@PathVariable("id") int id){
+        if (!personService.existsByIdPerson(id))
+            return new ResponseEntity(new Mensaje("No existe "), HttpStatus.NOT_FOUND);
+
         return new ResponseEntity<>(
                 this.personService.getOne(id),
                 HttpStatus.OK
@@ -64,5 +68,14 @@ public class PersonController {
                 this.personService.update(personDto.getPerson()),
                 HttpStatus.CREATED
         );
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> borrarUser(@PathVariable("id") int id){
+        if (!personService.existsByIdPerson(id))
+            return new ResponseEntity(new Mensaje("No existe "), HttpStatus.NOT_FOUND);
+        personService.deletePerson(id);
+        return new ResponseEntity(new Mensaje("Persona eliminada"), HttpStatus.OK);
     }
 }

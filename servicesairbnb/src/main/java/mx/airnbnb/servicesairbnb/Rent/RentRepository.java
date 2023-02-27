@@ -18,4 +18,14 @@ public interface RentRepository extends JpaRepository<Rent, Integer> {
             @Param("start_rent") String start_rent,
             @Param("depa_id") int depa_id,
             @Param("user_id") int user_id);
+
+    @Modifying
+    @Query(value = "UPDATE rents  SET description = :description, end_rent = :end_rent, departament_id = :depa_id, user_id=:user_id  WHERE id = :id", nativeQuery = true)
+    void update(
+            @Param("description") String description,
+            @Param("end_rent") String end_rent,
+            @Param("depa_id") int depa_id,
+            @Param("user_id") int user_id,
+            @Param("id") int id
+            );
 }

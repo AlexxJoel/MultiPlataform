@@ -1,0 +1,425 @@
+{
+	"info": {
+		"_postman_id": "c0df7691-8e5a-4f6e-98fa-7a660a77ee5c",
+		"name": "Services Airnbnb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23848688"
+	},
+	"item": [
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api_airnbnb/person/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"person",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"birthday\": \"2003-11-09\", \r\n    \"full_name\": \"Joel Alejandro Herrera Hernandez\",\r\n    \"user\": {\r\n           \"email\": \"alejandrojoel@gmail.com\", \r\n           \"uid\" : \"3DsFPLPOUWMBWfVvuesIt9xMigUXNTNuwt1xiwUmPFs\", \r\n           \"image_profile\": \"CniF2EChSfbvWxAxhu54wBSVLeEgCOmw8AH7pkV5Rw4\" \r\n    }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/person/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"person",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"birthday\": \"2021-03-01\", \r\n    \"full_name\": \"Cristian Alexis Chino Moreno\",\r\n    \"user\": {\r\n        \"id\": 1,\r\n           \"email\": \"crsitianRoman@gmail.com\", \r\n           \"uid\" : \"3DsFPLPOUWMBWfVvuesIt9xMigUXNTNuwt1xiwUmPFs\", \r\n           \"image_profile\": \"3DsFPLPOUWMBWfVvuesIt9xMigUXNTNuwt1xiwUmPFs\"   \r\n    }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/person/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"person",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api_airnbnb/person/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"person",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"joelherreraxd10@gmail.com\", \r\n   \"uid\" : \"CniF2EChSfbvWxAxhu54wBSVLeEgCOmw8AH7pkV5Rw4\", \r\n   \"image_profile\": \"3DsFPLPOUWMBWfVvuesIt9xMigUXNTNuwt1xiwUmPFs\", \r\n   \"person\" :  {\r\n       \"id\": 2\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api_airnbnb/user/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePerson",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api_airnbnb/user/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Departament",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/departament/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"departament",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"SuitExtraGRande\", \r\n    \"location\" : \"{\\\"latitud\\\": \\\"3323233\\\" }\",\r\n    \"images\":\"{\\\"image1\\\": \\\"CniF2EChSfbvWxAxhu54wBSVLeEgCOmw8AH7pkV5Rw4\\\" }\", \r\n    \"description\": \"Viaje escolar\", \r\n    \"rating\": 9, \r\n    \"quantity_rating\": 6, \r\n    \"price\": 200\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/departament/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"departament",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"SuitExtraChica\", \r\n    \"location\" : \"{\\\"latitud\\\": \\\"3323233\\\" }\",\r\n    \"images\":\"{\\\"image1\\\": \\\"CniF2EChSfbvWxAxhu54wBSVLeEgCOmw8AH7pkV5Rw4\\\" }\", \r\n    \"description\": \"Viaje escolar\", \r\n    \"rating\": 9, \r\n    \"quantity_rating\": 6, \r\n    \"price\": 200\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/departament/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"departament",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/departament/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"departament",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rent",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/rent/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"rent",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"aaaaaaaaaaaaaaalaaa\", \r\n    \"departament\" : {\r\n        \"id\": 1\r\n    },\r\n    \"user\": {\r\n        \"id\": 1\r\n    },\r\n    \"start_rent\": \"2021-01-01\",\r\n    \"end_rent\": \"2021-02-01\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/rent/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"rent",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api_airnbnb/person/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api_airnbnb",
+								"person",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

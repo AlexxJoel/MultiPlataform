@@ -45,14 +45,20 @@ public class RentController {
         return new ResponseEntity(new Mensaje("Renta creada"), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarRent(@PathVariable("id") int id, @RequestBody Rent rent){
+    @PutMapping("/")
+    public ResponseEntity<?> updateRent(@RequestBody Rent rent){
+        if (!rentService.existsByIdRent(rent.getId()))
+            return new ResponseEntity(new Mensaje("No existe "), HttpStatus.NOT_FOUND);
 
-        Rent rent1 = rentService.getRent(id).get();
+        Rent rent1 = rentService.getRent(rent.getId()).get();
 
+        rent1.setDescription(rent.getDescription());
         rent1.setDepartament(rent.getDepartament());
         rent1.setUser(rent.getUser());
-        rentService.save(rent1);
+        rent1.setEnd_rent(rent.getEnd_rent());
+
+        rentService.update(rent1);
+
         return new ResponseEntity(new Mensaje("Renta actualizada"), HttpStatus.OK);
     }
 

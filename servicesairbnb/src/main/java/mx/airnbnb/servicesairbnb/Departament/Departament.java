@@ -49,7 +49,7 @@ public class Departament {
     private float price;
 
     @OneToMany(mappedBy = "departament", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("departament")
+    @JsonIgnore
     private List<Rent> rent;
 
 

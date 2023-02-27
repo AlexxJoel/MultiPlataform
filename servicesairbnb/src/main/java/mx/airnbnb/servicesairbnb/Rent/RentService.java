@@ -33,8 +33,18 @@ public class RentService {
 
 
     public  void save(Rent rent){
+        //rentRepository.insert(rent.getDescription(), rent.getEnd_rent(), rent.getStart_rent(), rent.getDepartament().getId(), rent.getUser().getId());
         rentRepository.insert(rent.getDescription(), rent.getEnd_rent(), rent.getStart_rent(), rent.getDepartament().getId(), rent.getUser().getId());
     }
+
+
+    public  void update(Rent rent){
+        rentRepository.update( rent.getDescription(), rent.getEnd_rent(),  rent.getDepartament().getId(), rent.getUser().getId(), rent.getId());
+    }
+
+
+
+
 
         /*    public Optional<Rent> getByNombreRent(String nombre) {
             return rentRepository.findByNombreRent(nombre);

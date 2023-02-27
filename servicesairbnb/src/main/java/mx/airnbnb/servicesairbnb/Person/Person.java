@@ -1,6 +1,7 @@
 package mx.airnbnb.servicesairbnb.Person;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,15 +24,15 @@ public class Person {
     private  int id ;
 
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String full_name;
 
-    @Column(nullable = false ,  columnDefinition = "TIMESTAMP")
+    @Column(nullable = true ,  columnDefinition = "TIMESTAMP")
     private String birthday;
 
 
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = false)
-    @JsonIgnore
+    @JsonIgnoreProperties("person")
     private User  user;
 
     public Person(int id, String full_name, String birthday, User user) {
