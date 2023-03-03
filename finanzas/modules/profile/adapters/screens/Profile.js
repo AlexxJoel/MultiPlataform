@@ -7,12 +7,16 @@ import UserLogged from './UserLogged'
 
 export default function Profile() {
     const [user, setUser] = useState(null)
+    const [reload, setReload] = useState(false)
+    const [session, setSession] = useState(null)
     useEffect(() => {
         (async () => {
             try {
                 const value = await AsyncStorage.getItem('@session')
-                console.log("Session", value);
+
                 if (value !== null) {
+                    setSession(JSON.parse(value))
+                    console.log("Session", value);                
                     setUser(true)
                 } else {
                     setUser(false)
@@ -21,9 +25,11 @@ export default function Profile() {
                 console.error("Error -> Profile", e)
             }
         })()
-    }, [])
+    setReload(false)
+    }, [reload])
+
     if (user == null) return <Loading />
-    return user ? <UserLogged /> : <UserGuest />
+    return user ? <UserLogged setReload={setReload} user={session}/> : <UserGuest />
 }
 
 const styles = StyleSheet.create({})
