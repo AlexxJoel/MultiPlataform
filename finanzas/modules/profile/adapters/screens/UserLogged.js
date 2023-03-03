@@ -1,29 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { Avatar, Button } from 'react-native-elements'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-// import {getAuth, updateProfile} from 'firebase/auth'
+import {getAuth, updateProfile} from 'firebase/auth'
 import * as Imagepicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import { doc, setDoc, getFirestore } from "firebase/firestore";
+import Loading from '../../../../kernel/components/Loading';
 
+export default function UserLogged({user}) {
 
-import Loading from '../../../../kernel/components/Loading'
+    console.log(user)
 
-export default function UserLogged({setReload, user}) {
-
+    const auth = getAuth(); 
     const [show, setShow] = useState(false)
-    const [text, setText] = useState('Procesando..')
-
-    const removeValue = async () => {
-        try {
-          setShow(true)
-          await AsyncStorage.removeItem('@session')
-          setShow(false)
-          setReload(true)
-        } catch(e) {console.log}
-    }
+    const [text, setText] = useState('Procesando..') 
 
     const uploadImage = async (uri) => {
         setShow(true ); 
@@ -67,39 +57,39 @@ export default function UserLogged({setReload, user}) {
         const storage = getStorage(); 
         console.log(storage);
 
-        getDownloadURL(ref(storage , `avatars/${user.uid}`)).then( async (url) =>{
+        getDownloadURL(ref(storage , `avatars/${user.uid}`)).then((url) =>{
 
-            const db = getFirestore(); 
+           updateProfile(auth.currentUser, { photoURL: url}).then(
+                () => setShow(false)
+            ).catch((error) => {
+                setShow(false);  console.log("Fallo", error )
+           })
 
-            const response = await addDoc(doc(db, `${user.uid}`), {
-                displayName: "",
-                photo: "url"
-              });
-
-              console.log("respuesta: ", response);
         }).catch((e) => console.log("error", err) )
     }
 
     return (
         <View style={styles.container}>
-            <View style={styles.infoContainer}>
-                <Avatar
-                    size={"large"}
-                    rounded
-                    source={ {uri: "https://firebasestorage.googleapis.com/v0/b/finanzas-e7859.appspot.com/o/Profile%2FJZ2h179pX1faAPCcNmARPXy0LsP2.gif?alt=media&token=f844a42a-1766-4c14-9f7d-5b4e3cf55f95"} }
-                    containerStyle={styles.avatar}
-                >
-                    <Avatar.Accessory size={22} onPress={ changeAvatar }/>
-                </Avatar>
-              
-                <View >
-                    <Text style={styles.displayName}>{ user.providerData[0].displayName? user.providerData[0].displayName : "Anónimo " }</Text>
-                    <Text >{ user.providerData[0].email }</Text>
-                </View>
-            </View>
+            {user&& (
+                    <View style={styles.infoContainer}>
+                        <Avatar
+                            size={"large"}
+                            rounded
+                            source={{ uri: user.photoURL }}
+                            containerStyle={styles.avatar}
+                        >
+                            <Avatar.Accessory size={22} onPress={changeAvatar} />
+                        </Avatar>
 
-            <Button title={"Cerrar Sesión"} buttonStyle={styles.btn}
-             onPress={ removeValue }/>
+                        <View >
+                            <Text style={styles.displayName}>{user.displayName ? user.displayName : "Anónimo "}</Text>
+                            <Text >{user.providerData[0].email}</Text>
+                        </View>
+                    </View>
+                )
+            }
+
+            <Button title={"Cerrar Sesión"} buttonStyle={styles.btn} onPress={ () => auth.signOut() }/>
 
              <Loading show={show} text={text}/>
         </View>

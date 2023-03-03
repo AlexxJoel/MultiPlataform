@@ -46,7 +46,7 @@ export default function CreateUser(props) {
                                         repeatPassword: ''
                                     })
                                 }
-                                console.log("Created User", user);
+                                // console.log("Created User", user);
                                 setShow(false)
                                 navigation.navigate("profileStack")
                             })
