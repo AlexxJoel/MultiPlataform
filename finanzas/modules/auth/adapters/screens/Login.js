@@ -6,7 +6,9 @@ import Loading from "../../../../kernel/components/Loading";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 export default function Login(props) {
-  const { navigation } = props
+  const { navigation,texto } = props
+  console.log(texto)
+
   const [error, setError] = useState({ email: '', password: '' });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,13 +16,16 @@ export default function Login(props) {
   const [show, setShow] = useState(false)
   //const [failSession, setFailSession] = useState(false)
   const auth = getAuth()
+  const [text, setText] = useState(texto)
+
 
 
   const login = () => {
+    setText("Iniciando sesión")
     if (!(isEmpty(email) || isEmpty(password))) {
-      console.log("Listos para iniciar sesión");
       setShow(true)
       setError({ email: '', password: '' })
+     
       signInWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
           setShow(false)
@@ -85,7 +90,7 @@ export default function Login(props) {
           onPress={() => navigation.navigate('createUserStackt')}>
           Crear cuenta
         </Text>
-        <Loading show={show} text='Iniciando sesión' />
+        <Loading show={show} text={text} />
       </ScrollView>
     </View>
   );

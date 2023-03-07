@@ -6,14 +6,16 @@ import {getAuth, updateProfile} from 'firebase/auth'
 import * as Imagepicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import Loading from '../../../../kernel/components/Loading';
+import Profile from './Profile';
+import { set } from 'lodash';
 
-export default function UserLogged({user}) {
+export default function UserLogged({user, navigation}) {
 
     console.log(user)
 
     const auth = getAuth(); 
     const [show, setShow] = useState(false)
-    const [text, setText] = useState('Procesando..') 
+    const [text, setText] = useState('Procesando...') 
 
     const uploadImage = async (uri) => {
         setShow(true ); 
@@ -68,28 +70,41 @@ export default function UserLogged({user}) {
         }).catch((e) => console.log("error", err) )
     }
 
+    const logOut = () => {
+        setShow(true); setText("Cerrando sesión")
+        const x =  setInterval(function(){
+            clearInterval(x)
+            auth.signOut()
+        },900)
+    } 
+
+
     return (
         <View style={styles.container}>
             {user&& (
                     <View style={styles.infoContainer}>
-                        <Avatar
-                            size={"large"}
-                            rounded
-                            source={{ uri: user.photoURL }}
-                            containerStyle={styles.avatar}
-                        >
-                            <Avatar.Accessory size={22} onPress={changeAvatar} />
-                        </Avatar>
+
+                      {user.photoURL?(
+                            <Avatar size={"large"} rounded  source={{ uri: user.photoURL }} containerStyle={styles.avatar}>
+                                <Avatar.Accessory size={22} onPress={changeAvatar} />
+                            </Avatar>
+                        ):(
+                            <Avatar size={"large"} rounded  title={user.email.charAt(0).toUpperCase()} containerStyle={styles.avatar} >
+                                <Avatar.Accessory size={22} onPress={changeAvatar} />
+                            </Avatar>
+                        )}
+                        
+               
 
                         <View >
                             <Text style={styles.displayName}>{user.displayName ? user.displayName : "Anónimo "}</Text>
-                            <Text >{user.providerData[0].email}</Text>
+                            <Text >{user.email}</Text>
                         </View>
                     </View>
                 )
             }
 
-            <Button title={"Cerrar Sesión"} buttonStyle={styles.btn} onPress={ () => auth.signOut() }/>
+            <Button title={"Cerrar Sesión"} buttonStyle={styles.btn} onPress={logOut}/>
 
              <Loading show={show} text={text}/>
         </View>
@@ -115,6 +130,7 @@ const styles = StyleSheet.create({
     }, 
     avatar:{
         marginRight: 16, 
+        backgroundColor: "purple"   
 
     },
  
