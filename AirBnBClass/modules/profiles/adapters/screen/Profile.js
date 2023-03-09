@@ -1,12 +1,23 @@
-import { View, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { auth } from '../../../../config/utils/firebase';
+import { Button } from '@rneui/base';
 
 const Profile = () => {
-  return (
-    <View>
-      <Text>Profile</Text>
-    </View>
-  )
+  const logout = () =>{
+    auth.signOut()
+    .then(console.log("Salio"))
+    .catch(console.log("Fallo su salida"))
+  } 
+ 
+   return(
+     <View>
+       <Text>Perfil</Text>
+       <Button onPress={logout}>Salir</Button>
+     </View>
+   )
 }
 
 export default Profile
+
+const styles = StyleSheet.create({})

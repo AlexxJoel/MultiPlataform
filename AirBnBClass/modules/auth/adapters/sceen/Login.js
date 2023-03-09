@@ -1,19 +1,18 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Input, Button, Image, Icon } from "@rneui/base";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from "react";
 import { isEmpty } from "lodash";
 import Loading from "../../../../kernel/components/Loading";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
-export default function Login(props) {
-  const { navigation } = props
+export default function Login() {
+
   const [error, setError] = useState({ email: '', password: '' });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true)
   const [show, setShow] = useState(false)
-  // const [failSession, setFailSession] = useState(false)
+
   const auth = getAuth()
   const login = () => {
     if (!(isEmpty(email) || isEmpty(password))) {
@@ -21,16 +20,8 @@ export default function Login(props) {
       setShow(true)
       setError({ email: '', password: '' })
       signInWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-          const user = userCredential.user;
-          try {
-            await AsyncStorage.setItem('@session', JSON.stringify(user))
-          } catch (e) {
-            console.error("Error -> login Storage",e);
-          }
-          console.log("Login",user);
+        .then(async () => {
           setShow(false)
-          navigation.navigate("profile")
         })
         .catch((error) => {
           setError({ email: '', password: 'Usuario o contraseña incorrectos' })
