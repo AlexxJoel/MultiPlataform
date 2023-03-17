@@ -7,7 +7,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 export default function Login(props) {
   const { navigation,texto } = props
-  console.log(texto)
+
 
   const [error, setError] = useState({ email: '', password: '' });
   const [email, setEmail] = useState("");

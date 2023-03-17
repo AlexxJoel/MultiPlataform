@@ -19,11 +19,12 @@ export default function Profile() {
         const auth = getAuth();
 
         onAuthStateChanged(auth, (credential) =>{
-            console.log("credencial", credential)
+           // console.log("credencial", credential)
             setUser(credential);
             !credential ? setSession(false): setSession(true)
         });
         setShow(false)
+
     }, [])
 
     return user ? <UserLogged user={user}/> : <Login texto={"Cerrando sesión"} navigation={navigation} />
